@@ -1,6 +1,6 @@
 import "./App.css";
 import Pallets from "./Pallets";
-import seedClors from "./seedClors";
+import seedColors from "./seedColors";
 
 function App() {
   return (
