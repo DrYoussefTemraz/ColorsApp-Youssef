@@ -20,12 +20,12 @@ class Pallete extends Component {
     this.setState({ format: val });
   }
   render() {
-    const { colors } = this.props.palette;
+    const { colors, paletteName, emoji } = this.props.palette;
     const { level, format } = this.state;
     // we will use slider liberary to make the levels change from 50 to 900 "npm install --save rc-slider"
     const colorBoxes = colors[level].map((color) => (
       // background having key of color and value of name which been passed to coloBox component
-      <ColorBox background={color[format]} name={color.name} />
+      <ColorBox background={color[format]} name={color.name} key={color.id} />
     ));
     return (
       <div className="Palette">
@@ -34,12 +34,15 @@ class Pallete extends Component {
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
         />
-        {/* Navbar goes here */}
+
         <div className="Palette-colors">
           {colorBoxes}
           {/* bunch of color boxes */}
         </div>
-        {/* footer goes here */}
+        <footer className="Palette-footer">
+          {paletteName}
+          <span className="emoji">{emoji}</span>
+        </footer>
       </div>
     );
   }
