@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Select from "@mui/material/Select";
 import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
-import SnackbarContent from "@mui/material/SnackbarContent";
+import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
 // import CloseIcon from "@mui/material/closeIcon";
 import Slider from "rc-slider";
@@ -33,7 +33,7 @@ class Navbar extends Component {
     return (
       <header className="Navbar">
         <div className="logo">
-          <a href="/"> Youssef React Color App </a>
+          <Link to="/">Youssef React Color App</Link>
         </div>
         <div className="slider-container">
           <span>level: {level}</span>
