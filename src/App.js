@@ -4,6 +4,7 @@ import seedColors from "./seedColors";
 import PaletteList from "./PaletteList";
 import { generatePalette } from "./colorHelpers";
 import { Route, Routes, useParams } from "react-router-dom";
+// import PaletteWrapper from "./PaletteWrapper";
 
 class App extends Component {
   findPalette(id) {
@@ -11,6 +12,7 @@ class App extends Component {
   }
 
   render() {
+    // modification of code as it could be seperated to a component "PalwtteWrapper"
     const PaletteWrapper = () => {
       const { id } = useParams();
       const palette = generatePalette(this.findPalette(id));
