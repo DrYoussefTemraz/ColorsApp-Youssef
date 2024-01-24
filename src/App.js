@@ -21,6 +21,8 @@ class App extends Component {
     return (
       <Routes>
         <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
+        render=
+        {(routeProps) => <PaletteList palettes={seedColors} {...routeProps} />}
         <Route exact path="/palette/:id" element={<PaletteWrapper />} />
       </Routes>
     );
