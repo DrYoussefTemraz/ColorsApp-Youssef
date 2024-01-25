@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import ColorBox from "./colorBox";
 import "./Palette.css";
 import Navbar from "./Navbar";
-import { Alert } from "@mui/material";
 class Palette extends Component {
   constructor(props) {
     super(props);
