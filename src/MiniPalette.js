@@ -14,7 +14,7 @@ const styles = {
   },
   colors: {
     backgroundColor: "#dae1e4",
-    height: "150px",
+    height: "100px",
     width: "100%",
     borderRadius: "5px",
     overflow: "hidden",
@@ -36,10 +36,11 @@ const styles = {
   miniColor: {
     height: "25%",
     width: "20%",
-    float: "left",
+    display: "inline-block",
+    // float: "left",
     margin: "0 auto",
     position: "relative",
-    marginBottom: "-1px",
+    marginBottom: "-3.5px",
   },
 };
 
