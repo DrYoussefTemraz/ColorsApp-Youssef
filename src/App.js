@@ -20,10 +20,23 @@ class App extends Component {
     };
     return (
       <Routes>
-        <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
-        render=
-        {(routeProps) => <PaletteList palettes={seedColors} {...routeProps} />}
+        <Route
+          exact
+          path="/"
+          element={<PaletteList palettes={seedColors} />}
+          //old version
+          // render={(routeProps) => (
+          //   <PaletteList palettes={seedColors} {...routeProps} />
+          // )
+          // }
+        />
         <Route exact path="/palette/:id" element={<PaletteWrapper />} />
+        <Route
+          exact
+          path="/palette/:paletId/:colorId"
+          element={<h1>SINGLE COLOR PAGE!</h1>}
+          // render={() => <h1>SINGLE COLOR PAGE!</h1>}
+        />
       </Routes>
     );
   }
