@@ -4,6 +4,7 @@ import seedColors from "./seedColors";
 import PaletteList from "./PaletteList";
 import { generatePalette } from "./colorHelpers";
 import { Route, Routes, useParams } from "react-router-dom";
+import SingleColorPalette from "./singleColorPalette";
 // import PaletteWrapper from "./PaletteWrapper";
 
 class App extends Component {
@@ -34,7 +35,7 @@ class App extends Component {
         <Route
           exact
           path="/palette/:paletId/:colorId"
-          element={<h1>SINGLE COLOR PAGE!</h1>}
+          element={<SingleColorPalette />}
           // render={() => <h1>SINGLE COLOR PAGE!</h1>}
         />
       </Routes>
