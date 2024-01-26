@@ -1,15 +1,37 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import ColorBox from "./colorBox";
 
 class SingleColorPalette extends Component {
+  constructor(props) {
+    super(props);
+    this._shades = this.gatherShades(this.props.palette, this.props.colorId);
+  }
+  gatherShades(palette, colorToFilterBy) {
+    let shades = [];
+    let allColors = palette.colors;
+    //loop over the colors
+    for (let key in allColors) {
+      shades = shades.concat(
+        allColors[key].filter((color) => color.id === colorToFilterBy)
+      );
+    }
+    //return all shades of given color
+    return shades.slice(1);
+  }
   render() {
+    const colorBoxes = this._shades.map((color) => (
+      <ColorBox
+        key={color.id}
+        name={color.name}
+        background={color.hex}
+        showLink={false}
+      />
+    ));
     return (
-      <>
-        <div>SINGLE COLOR PALETTE for a component</div>;
-        <Link to="/" onClick={(e) => e.stopPropagation()}>
-          <span>back home</span>
-        </Link>
-      </>
+      <div className="Palette">
+        <h1>Single Color Palette</h1>
+        <div className="Palette-colors">{colorBoxes}</div>
+      </div>
     );
   }
 }

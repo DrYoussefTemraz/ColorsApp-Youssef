@@ -13,30 +13,25 @@ class App extends Component {
   }
 
   render() {
-    // modification of code as it could be seperated to a component "PalwtteWrapper"
+    // modification of code as it could be seperated to a component "PaletteWrapper"
     const PaletteWrapper = () => {
       const { id } = useParams();
       const palette = generatePalette(this.findPalette(id));
       return <Palette palette={palette} />;
     };
+    const SingleColorPaletteWrapper = () => {
+      const { paletteId, colorId } = useParams();
+      const palette = generatePalette(this.findPalette(paletteId));
+      return <SingleColorPalette palette={palette} colorId={colorId} />;
+    };
     return (
       <Routes>
-        <Route
-          exact
-          path="/"
-          element={<PaletteList palettes={seedColors} />}
-          //old version
-          // render={(routeProps) => (
-          //   <PaletteList palettes={seedColors} {...routeProps} />
-          // )
-          // }
-        />
+        <Route exact path="/" element={<PaletteList palettes={seedColors} />} />
         <Route exact path="/palette/:id" element={<PaletteWrapper />} />
         <Route
           exact
-          path="/palette/:paletId/:colorId"
-          element={<SingleColorPalette />}
-          // render={() => <h1>SINGLE COLOR PAGE!</h1>}
+          path="/palette/:paletteId/:colorId"
+          element={<SingleColorPaletteWrapper />}
         />
       </Routes>
     );
