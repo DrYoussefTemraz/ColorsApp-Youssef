@@ -16,6 +16,7 @@ class SingleColorPalette extends Component {
       );
     }
     //return all shades of given color
+    //return the color shades begin from 100
     return shades.slice(1);
   }
   render() {
