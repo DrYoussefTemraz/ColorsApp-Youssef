@@ -39,7 +39,7 @@ class Palette extends Component {
           level={level}
           changeLevel={this.changeLevel}
           handleChange={this.changeFormat}
-          showingAllColors
+          showingAllcolors
         />
 
         <div className="Palette-colors">
