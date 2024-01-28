@@ -4,7 +4,6 @@
     margin: 0 auto;
     display: inline-block;
     position: relative;
-    cursor: pointer;
     margin-bottom: -3.5px;
     }
     .SingleColorPalette .ColorBox {
@@ -14,9 +13,9 @@
         background-color: black;
         position: relative;
       }
-    
-    .copy-button,
-    .back-button  {
+    .back-button,
+    .copy-button 
+      {
         width: 100px;
         height: 30px;
         position: absolute;
@@ -33,8 +32,9 @@
         color: white;
         text-transform: uppercase;
         border: none;
-        opacity: 0;
         text-decoration: none;
+        cursor: pointer;
+
     }
     .copy-button{
         opacity: 0;
