@@ -3,6 +3,16 @@ import ColorBox from "./colorBox";
 import "./Palette.css";
 import Navbar from "./Navbar";
 import PaletteFooter from "./PaletteFooter";
+import { withStyles } from "@mui/styles";
+
+const styles = {
+  Palette: {
+    height: "100vh",
+    display: "flex",
+    flexDirection: "column",
+  },
+  colors: { height: "90%" },
+};
 class Palette extends Component {
   constructor(props) {
     super(props);
@@ -21,6 +31,7 @@ class Palette extends Component {
   }
   render() {
     const { colors, paletteName, emoji, id } = this.props.palette;
+    const { classes } = this.props;
     const { level, format } = this.state;
     // we will use slider liberary to make the levels change from 50 to 900 "npm install --save rc-slider"
     const colorBoxes = colors[level].map((color) => (
@@ -34,7 +45,7 @@ class Palette extends Component {
       />
     ));
     return (
-      <div className="Palette">
+      <div className={classes.Palette}>
         <Navbar
           level={level}
           changeLevel={this.changeLevel}
@@ -42,7 +53,7 @@ class Palette extends Component {
           showingAllcolors
         />
 
-        <div className="Palette-colors">
+        <div className={classes.colors}>
           {colorBoxes}
           {/* bunch of color boxes */}
         </div>
@@ -51,4 +62,4 @@ class Palette extends Component {
     );
   }
 }
-export default Palette;
+export default withStyles(styles)(Palette);
