@@ -4,10 +4,12 @@ import MenuItem from "@mui/material/MenuItem";
 import Snackbar from "@mui/material/Snackbar";
 import { Link } from "react-router-dom";
 import IconButton from "@mui/material/IconButton";
+import styles from "./styles/NavbarStyles";
+import { withStyles } from "@mui/styles";
 // import CloseIcon from "@mui/material/closeIcon";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import "./Navbar.css";
+// import "./Navbar.css";
 
 class Navbar extends Component {
   constructor(props) {
@@ -27,18 +29,18 @@ class Navbar extends Component {
     this.setState({ open: false });
   }
   render() {
-    const { level, changeLevel, showingAllcolors } = this.props;
+    const { level, changeLevel, showingAllcolors, classes } = this.props;
     const { format } = this.state;
 
     return (
-      <header className="Navbar">
-        <div className="logo">
+      <header className={classes.Navbar}>
+        <div className={classes.logo}>
           <Link to="/">Youssef React Color App</Link>
         </div>
         {showingAllcolors && (
-          <div className="slider-container">
+          <div>
             <span>level: {level}</span>
-            <div className="slider">
+            <div className={classes.slider}>
               <Slider
                 defaultValue={level}
                 min={100}
@@ -49,7 +51,7 @@ class Navbar extends Component {
             </div>
           </div>
         )}
-        <div className="select-container">
+        <div className={classes.selectContainer}>
           <Select value={format} onChange={this.handleFormatChange}>
             <MenuItem value="hex">HEX: #eedd86 </MenuItem>
             <MenuItem value="rgb">rgb(255,255,255,255) </MenuItem>
@@ -83,4 +85,4 @@ class Navbar extends Component {
     );
   }
 }
-export default Navbar;
+export default withStyles(styles)(Navbar);
