@@ -10,6 +10,7 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import DraggableColorBox from "./DraggableColorBox";
 import { ChromePicker } from "react-color";
 import { Button } from "@mui/material";
 
@@ -18,6 +19,7 @@ const drawerWidth = 400;
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
     flexGrow: 1,
+    height: "calc(100vh - 64px)",//this 64 is the height of the AppBar
     padding: theme.spacing(3),
     transition: theme.transitions.create("margin", {
       easing: theme.transitions.easing.sharp,
@@ -37,6 +39,7 @@ const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
 const AppBar = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
+  height: "64px",
   transition: theme.transitions.create(["margin", "width"], {
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
@@ -140,15 +143,13 @@ export default function NewPaletteForm() {
           ADD COLOR{" "}
         </Button>
       </Drawer>
-      <Main open={open}>
+      <Main  open={open}>
         <DrawerHeader />
-        <ul>
+        
           {colors.map(color => (
-            <li key={color} style={{ backgroundColor: color }}>
-              {color}
-            </li>
+           <DraggableColorBox key = {color} color= {color}/>
           ))}
-        </ul>
+      
       </Main>
     </Box>
   );
