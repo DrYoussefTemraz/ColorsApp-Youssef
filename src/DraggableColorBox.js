@@ -19,7 +19,7 @@ const styles = {
     <div style = {{backgroundColor: props.color}}
     className={props.classes.root}>
       
-    {props.color}</div>
+    {props.name}</div>
   )
 }
 export default withStyles(styles)(DraggableColorBox)

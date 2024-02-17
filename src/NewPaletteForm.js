@@ -1,4 +1,4 @@
-import * as React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { styled, useTheme } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import Drawer from "@mui/material/Drawer";
@@ -13,8 +13,10 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import DraggableColorBox from "./DraggableColorBox";
 import { ChromePicker } from "react-color";
 import { Button } from "@mui/material";
+import { ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
-const drawerWidth = 400;
+
+const drawerWidth = 240;
 
 const Main = styled("main", { shouldForwardProp: (prop) => prop !== "open" })(
   ({ theme, open }) => ({
@@ -65,9 +67,35 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 
 export default function NewPaletteForm() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
-  const [currentColor, setCurrentColor] = React.useState("teal");
-  const [colors, setColors] = React.useState(["purple", "#e15764"]);
+  const [open, setOpen] = useState(true);
+  const [currentColor, setCurrentColor] = useState("teal");
+  const [colors, setColors] = useState([]);
+  const [newName, setNewName]= useState("");
+  const formRef = useRef(null);
+//instead of componentDidMount in documentation of react validation material ui
+// componentDidMount() {
+//   ValidatorForm.addValidationRule("isColorNameUnique", value =>
+//     this.state.colors.every(
+//       ({ name }) => name.toLowerCase() !== value.toLowerCase()
+//     )
+//   );
+//   ValidatorForm.addValidationRule("isColorUnique", value =>
+//     this.state.colors.every(({ color }) => color !== this.state.currentColor)
+//   );
+// }
+  useEffect(() => {
+    ValidatorForm.addValidationRule("isColorNameUnique", (value) =>
+      colors.every(({ name }) => name.toLowerCase() !== value.toLowerCase())
+    );
+    ValidatorForm.addValidationRule("isColorUnique", (value) =>
+      colors.every(({ color }) => color !== currentColor)
+    );
+
+    return () => {
+      ValidatorForm.removeValidationRule("isColorNameUnique");
+      ValidatorForm.removeValidationRule("isColorUnique");
+    };
+  }, [colors, currentColor]);
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -80,7 +108,17 @@ export default function NewPaletteForm() {
     setCurrentColor(newColor.hex);
   };
     const addNewColor = () => {
-      setColors([...colors, currentColor]);  };
+      const newColor = {
+        color: currentColor,
+        name: newName
+      };
+      setColors([...colors, newColor]); 
+      setNewName("") };
+      
+
+  const handleChange = (evt) =>{
+      setNewName (evt.target.value)
+  }
 
   return (
     <Box sx={{ display: "flex" }}>
@@ -133,21 +171,35 @@ export default function NewPaletteForm() {
           color={currentColor}
           onChangeComplete={updateCurrentColor}
         />
-        <Button
-          style={{ backgroundColor: currentColor }}
+        <ValidatorForm onSubmit ={addNewColor} ref={formRef}>
+          <TextValidator 
+          value ={newName}
+          onChange = {handleChange}
+          validators={["required", "isColorNameUnique", "isColorUnique"]}
+            errorMessages={[
+              "Enter a color name",
+              "Joe says that : Color name must be unique",
+              "Joe says that : Color already used!", 
+              //order matters
+              ]}/>
+<Button
+          style={{ backgroundColor: currentColor}}
           varient="contained"
           color="primary"
-          onClick={addNewColor}
+          // onClick={addNewColor}
+          type="submit"
 
         >
           ADD COLOR{" "}
         </Button>
+        </ValidatorForm>
+        
       </Drawer>
       <Main  open={open}>
         <DrawerHeader />
         
           {colors.map(color => (
-           <DraggableColorBox key = {color} color= {color}/>
+           <DraggableColorBox key = {color.name} color={color.color} name={color.name}/>
           ))}
       
       </Main>
